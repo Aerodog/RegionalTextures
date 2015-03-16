@@ -2,6 +2,7 @@ package com.shiniofthegami.regionaltextures;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.shiniofthegami.regionaltextures.commands.PacksCommand;
 import com.shiniofthegami.regionaltextures.handlers.PackHandler;
 import com.shiniofthegami.regionaltextures.handlers.RegionOverlayHandler;
 import com.shiniofthegami.regionaltextures.util.Debugger;
@@ -18,6 +19,8 @@ public class RegionalTextures extends JavaPlugin{
 		PackHandler.init(this);
 		Debugger.debug("Initializing RegionOverlayHandler!");
 		RegionOverlayHandler.init(this);
+		Debugger.debug("Registering packs command!");
+		this.getCommand("packs").setExecutor(new PacksCommand(this));
 	}
 	
 	public WorldGuardPlugin getWorldGuard(){

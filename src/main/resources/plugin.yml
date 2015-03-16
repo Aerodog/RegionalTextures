@@ -3,3 +3,13 @@ version: 0.0.1-SNAPSHOT
 main: com.shiniofthegami.regionaltextures.RegionalTextures
 author: [ShiniOfTheGami]
 depend: [WorldGuard]
+
+commands:
+  packs:
+    permission: regionaltextures.manage.packs
+    description: manage packs
+    usage: |
+      USAGE:
+      /packs list - Lists all current packs
+      /packs add <name> <url> - adds a pack
+      /packs remove <name> - removes a pack

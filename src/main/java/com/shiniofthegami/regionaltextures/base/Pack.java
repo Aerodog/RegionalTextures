@@ -5,7 +5,7 @@ public class Pack {
 	private String packURL;
 	private String packName;
 	
-	public Pack(String packURL, String packName){
+	public Pack(String packName, String packURL){
 		this.packURL = packURL;
 		this.packName = packName;
 	}

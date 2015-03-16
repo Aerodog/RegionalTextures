@@ -20,6 +20,7 @@ public class RegionOverlayHandler {
 	private static List<World> worlds = new ArrayList<World>();
 	public static void init(RegionalTextures pl){
 		RegionOverlayHandler.pl = pl;
+		loadRegionOverlays();
 	}
 	
 	public static void addRegion(RegionOverlay r){
@@ -27,13 +28,30 @@ public class RegionOverlayHandler {
 		if(!worlds.contains(r.getWorld())){
 			worlds.add(r.getWorld());
 		}
+		saveRegionOverlays();
 	}
 	
+	public static void clearRegions(){
+		regions.clear();
+	}
+	
+	public static void saveRegionOverlays(){
+		Debugger.debug("Saving regions to file!");
+		pl.getConfig().set("regions",null);
+		for(RegionOverlay r : regions){
+			pl.getConfig().set("regions." + r.getName() + ".region", r.getRegion().getId());
+			pl.getConfig().set("regions." + r.getName() + ".world", r.getWorld().getName());
+			pl.getConfig().set("regions." + r.getName() + ".pack", r.getPack().getName());
+		}
+		pl.saveConfig();
+		loadRegionOverlays();
+	}
 	public static void loadRegionOverlays(){
 		if(!pl.getConfig().contains("regions")){
 			Debugger.debug("Regions section undefined!");
 			return;
 		}
+		clearRegions();
 		ConfigurationSection regionoverlays = pl.getConfig().getConfigurationSection("regions");
 		for(String key : regionoverlays.getKeys(false)){
 			String regionname = regionoverlays.getString(key + ".region");
