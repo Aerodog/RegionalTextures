@@ -1,0 +1,5 @@
+name: RegionalTextures
+version: 0.0.1-SNAPSHOT
+main: com.shiniofthegami.regionaltextures.RegionalTextures
+author: [ShiniOfTheGami]
+depend: [WorldGuard]
