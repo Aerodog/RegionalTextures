@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 
 import com.shiniofthegami.regionaltextures.RegionalTextures;
 import com.shiniofthegami.regionaltextures.base.Pack;
@@ -17,9 +18,16 @@ public class PackHandler {
 		loadPacks();
 	}
 	
+	public static void applyDefaultPack(Player p){
+		String defaultPack = pl.getConfig().getString("default");
+		if(defaultPack == null || defaultPack.equals("none")){
+			return;
+		}
+		p.setResourcePack(defaultPack);
+	}
+	
 	public static void addPack(Pack o){
 		packs.add(o);
-		savePacks();
 	}
 	
 	public static void clearPacks(){
@@ -33,7 +41,6 @@ public class PackHandler {
 			pl.getConfig().set("packs." + p.getName() + ".url", p.getURL());
 		}
 		pl.saveConfig();
-		RegionOverlayHandler.loadRegionOverlays();
 	}
 	
 	public static void loadPacks(){
@@ -53,6 +60,7 @@ public class PackHandler {
 			addPack(o);
 			Debugger.debug("Loaded pack " + o.toString());
 		}
+		savePacks();
 	}
 	
 	public static Pack getPack(String name){
@@ -78,6 +86,7 @@ public class PackHandler {
 	
 	public static void removePack(Pack p){
 		packs.remove(p);
+		savePacks();
 	}
 	
 }

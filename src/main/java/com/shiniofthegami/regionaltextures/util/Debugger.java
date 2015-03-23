@@ -1,7 +1,11 @@
 package com.shiniofthegami.regionaltextures.util;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
@@ -12,7 +16,9 @@ public class Debugger {
 	private static void log(String file, String toLog, Level logLevel){
 		Log.createFile(file);
 		ArrayList<String> log = Log.parseFile(file);
-		log.add("[" + logLevel.getName() + "] " + toLog);
+		Date d = Calendar.getInstance().getTime();
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		log.add("[" + df.format(d) + "]" + "[" + logLevel.getName() + "] " + toLog);
 		try {
 			Log.writeTextToFile(file, log);
 		} catch (IOException e) {
@@ -23,6 +29,6 @@ public class Debugger {
 		}
 	}
 	public static void debug(String toLog){
-		log("debug",toLog,Level.WARNING);
+		log("debug",toLog,Level.INFO);
 	}
 }

@@ -1,5 +1,5 @@
 name: RegionalTextures
-version: 0.0.1-SNAPSHOT
+version: 1.0.0-RELEASE
 main: com.shiniofthegami.regionaltextures.RegionalTextures
 author: [ShiniOfTheGami]
 depend: [WorldGuard]
@@ -13,3 +13,12 @@ commands:
       /packs list - Lists all current packs
       /packs add <name> <url> - adds a pack
       /packs remove <name> - removes a pack
+  overlays:
+    permission: regionaltextures.manage.overlays
+    description: manage overlays
+    usage: |
+      USAGE:
+      /overlays list - Lists all current overlays
+      /overlays add <name> <region> <pack> - adds an overlay
+      /overlays remove <name> - removes an overlay
+      /overlays update - updates the overlays to use changed pack URLs

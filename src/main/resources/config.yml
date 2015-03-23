@@ -1,3 +1,5 @@
-#!DO NOT ADD REGIONS VIA FILE, USE INGAME COMMANDS INSTEAD!
-regions:
+#The default pack to use
+default: "http://packs.theblockworlds.com/base/latest"
+#!DO NOT ADD REGIONS OR PACKS VIA FILE, USE INGAME COMMANDS INSTEAD!
+overlays:
 packs:

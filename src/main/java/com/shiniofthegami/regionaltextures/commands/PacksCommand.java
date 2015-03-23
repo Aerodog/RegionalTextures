@@ -12,6 +12,7 @@ import com.shiniofthegami.regionaltextures.RegionalTextures;
 import com.shiniofthegami.regionaltextures.base.CommandHandler;
 import com.shiniofthegami.regionaltextures.base.Pack;
 import com.shiniofthegami.regionaltextures.handlers.PackHandler;
+import com.shiniofthegami.regionaltextures.util.Debugger;
 
 public class PacksCommand extends CommandHandler implements TabCompleter{
 	List<String> arguments = new ArrayList<String>();
@@ -46,7 +47,9 @@ public class PacksCommand extends CommandHandler implements TabCompleter{
 			}
 			Pack p = new Pack(name, url);
 			PackHandler.addPack(p);
-			sender.sendMessage("Added pack " + p);
+			PackHandler.savePacks();
+			sender.sendMessage(ChatColor.GRAY + "Added pack " + ChatColor.AQUA + p);
+			Debugger.debug("Pack " + p + " added via command");
 			return true;
 		}
 		if(args[0].equalsIgnoreCase("remove")){
@@ -56,17 +59,20 @@ public class PacksCommand extends CommandHandler implements TabCompleter{
 			String name = args[1];
 			Pack p = PackHandler.getPack(name);
 			if(p == null){
-				sender.sendMessage(ChatColor.RED + "Pack" + ChatColor.AQUA + name + ChatColor.RED + " not found!");
+				sender.sendMessage(ChatColor.RED + "Pack " + ChatColor.AQUA + name + ChatColor.RED + " not found!");
+				Debugger.debug("Pack remove command: Pack " + name + " not found!");
 				return true;
 			}
 			PackHandler.removePack(p);
 			sender.sendMessage(ChatColor.GRAY + "Pack " + ChatColor.AQUA + name + ChatColor.GRAY + " removed!");
+			Debugger.debug("Pack remove command: Pack " + name + " removed!");
 			return true;
 		}
 		return false;
 	}
 
 	public void printList(CommandSender sender){
+		sender.sendMessage(ChatColor.AQUA + "Default pack: " + ChatColor.GREEN + pl.getConfig().getString("default"));
 		sender.sendMessage(ChatColor.GRAY + "Packs listed as: " + ChatColor.AQUA + "NAME" + ChatColor.GRAY + " - " + ChatColor.AQUA + "URL");
 		for(Pack p : PackHandler.getPacks()){
 			sender.sendMessage(ChatColor.AQUA + p.getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + p.getURL());
@@ -75,10 +81,10 @@ public class PacksCommand extends CommandHandler implements TabCompleter{
 	
 	public List<String> onTabComplete(CommandSender sender, Command command,
 			String alias, String[] args) {
-		if(args.length == 0){
+		if(args.length == 1 && args[0] == ""){
 			return arguments;
 		}
-		if(args.length == 1){
+		if(args.length == 2 && args[1] == ""){
 			if(args[0].equalsIgnoreCase("remove")){
 				return PackHandler.getPackNames();
 			}

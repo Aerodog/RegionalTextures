@@ -1,13 +1,23 @@
 package com.shiniofthegami.regionaltextures.base;
 
+import org.bukkit.entity.Player;
+
 
 public class Pack {
 	private String packURL;
 	private String packName;
 	
 	public Pack(String packName, String packURL){
+		if(!packURL.startsWith("http")){
+			packURL = "http://" + packURL;
+		}
 		this.packURL = packURL;
 		this.packName = packName;
+	}
+	
+	
+	public void apply(Player p){
+		p.setResourcePack(this.getURL());
 	}
 	
 	public String getURL(){
