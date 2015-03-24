@@ -37,8 +37,6 @@ public class PlayerListener implements Listener{
 			return;
 		}
 		o.getPack().apply(p);
-		p.sendMessage(ChatColor.GRAY + "Applying pack " + ChatColor.AQUA + o.getPack().getName() + ChatColor.GRAY + " to you!");
-		Debugger.debug("Applying pack " + o.getPack() + " to Player " + p.getName());
 	}
 	
 	public void handle(Player p, Location from, Location to){
@@ -54,7 +52,5 @@ public class PlayerListener implements Listener{
 			return;
 		}
 		toOverlay.getPack().apply(p);
-		p.sendMessage(ChatColor.GRAY + "Applying pack " + ChatColor.AQUA + toOverlay.getPack().getName() + ChatColor.GRAY + " to you!");
-		Debugger.debug("Applying pack " + toOverlay.getPack() + " to Player " + p.getName());
 	}
 }

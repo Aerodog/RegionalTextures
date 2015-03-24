@@ -1,6 +1,9 @@
 package com.shiniofthegami.regionaltextures.base;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import com.shiniofthegami.regionaltextures.util.Debugger;
 
 
 public class Pack {
@@ -18,6 +21,8 @@ public class Pack {
 	
 	public void apply(Player p){
 		p.setResourcePack(this.getURL());
+		p.sendMessage(ChatColor.GRAY + "Applying pack " + ChatColor.AQUA + this.getName() + ChatColor.GRAY + " to you!");
+		Debugger.debug("Applying pack " + this + " to Player " + p.getName());
 	}
 	
 	public String getURL(){
