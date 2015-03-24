@@ -3,6 +3,7 @@ package com.shiniofthegami.regionaltextures.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
@@ -24,6 +25,7 @@ public class PackHandler {
 			return;
 		}
 		p.setResourcePack(defaultPack);
+		p.sendMessage(ChatColor.GRAY + "Applying" + ChatColor.AQUA + " default pack " + ChatColor.GRAY + "to you!");
 	}
 	
 	public static void addPack(Pack o){

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -65,6 +66,15 @@ public class OverlayHandler {
 	public static Overlay getOverlay(String name){
 		for(Overlay o : overlays){
 			if(o.getName().equalsIgnoreCase(name)){
+				return o;
+			}
+		}
+		return null;
+	}
+	
+	public static Overlay getOverlay(Location l){
+		for(Overlay o : overlays){
+			if(o.getRegion().contains(l.getBlockX(), l.getBlockY(), l.getBlockZ())){
 				return o;
 			}
 		}

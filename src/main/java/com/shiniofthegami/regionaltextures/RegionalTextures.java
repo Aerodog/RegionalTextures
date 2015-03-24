@@ -31,7 +31,7 @@ public class RegionalTextures extends JavaPlugin{
 		this.getCommand("overlays").setExecutor(regionsHandler);
 		this.getCommand("overlays").setTabCompleter(regionsHandler);
 		Debugger.debug("Registering listeners!");
-		Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 	}
 	
 	public WorldGuardPlugin getWorldGuard(){
