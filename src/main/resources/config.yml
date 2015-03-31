@@ -1,5 +1,5 @@
 #The default pack to use
-default: "http://packs.theblockworlds.com/base/latest"
+default: "http://packs.theblockworlds.com/base/latest.zip"
 #!DO NOT ADD REGIONS OR PACKS VIA FILE, USE INGAME COMMANDS INSTEAD!
 overlays:
 packs:

@@ -22,3 +22,7 @@ commands:
       /overlays add <name> <region> <pack> - adds an overlay
       /overlays remove <name> - removes an overlay
       /overlays update - updates the overlays to use changed pack URLs
+  toggletextures:
+    permissions: regionaltextures.toggle
+    description: Toggles whether or not the regional textures get applied to you
+    usage: /<command>

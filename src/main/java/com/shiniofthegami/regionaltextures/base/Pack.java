@@ -20,6 +20,9 @@ public class Pack {
 	
 	
 	public void apply(Player p){
+		if(this.getURL().equals("none")){
+			return;
+		}
 		p.setResourcePack(this.getURL());
 		p.sendMessage(ChatColor.GRAY + "Applying pack " + ChatColor.AQUA + this.getName() + ChatColor.GRAY + " to you!");
 		Debugger.debug("Applying pack " + this + " to Player " + p.getName());

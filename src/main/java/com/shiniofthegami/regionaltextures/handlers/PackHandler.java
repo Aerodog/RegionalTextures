@@ -2,6 +2,7 @@ package com.shiniofthegami.regionaltextures.handlers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
@@ -14,9 +15,27 @@ import com.shiniofthegami.regionaltextures.util.Debugger;
 public class PackHandler {
 	private static RegionalTextures pl;
 	private static List<Pack> packs = new ArrayList<Pack>();
+	private static List<UUID> excludedPlayers = new ArrayList<UUID>();
 	public static void init(RegionalTextures pl){
 		PackHandler.pl = pl;
 		loadPacks();
+	}
+	
+	public static boolean isExcluded(Player p){
+		return excludedPlayers.contains(p.getUniqueId());
+	}
+	
+	public static void togglePlayer(Player p){
+		if(excludedPlayers.contains(p.getUniqueId())){
+			excludedPlayers.remove(p.getUniqueId());
+			p.sendMessage(ChatColor.AQUA + "You are now no longer excluded from the Server Textures changing. Reconnect to the Server to apply this change.");
+			Debugger.debug("Including player " + p.getName() + " in automatic changing!");
+		}else{
+			excludedPlayers.add(p.getUniqueId());
+			p.sendMessage(ChatColor.AQUA + "You are now excluded from the Server Textures changing. Reconnect to the Server to apply this change.");
+			Debugger.debug("Excluding player " + p.getName() + " from automatic changing!");
+		}
+		
 	}
 	
 	public static void applyDefaultPack(Player p){

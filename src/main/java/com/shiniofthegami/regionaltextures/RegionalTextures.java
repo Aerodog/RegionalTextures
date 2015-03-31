@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.shiniofthegami.regionaltextures.commands.PacksCommand;
 import com.shiniofthegami.regionaltextures.commands.OverlaysCommand;
+import com.shiniofthegami.regionaltextures.commands.ToggleTexturesCommand;
 import com.shiniofthegami.regionaltextures.handlers.PackHandler;
 import com.shiniofthegami.regionaltextures.handlers.OverlayHandler;
 import com.shiniofthegami.regionaltextures.listeners.PlayerListener;
@@ -30,6 +31,8 @@ public class RegionalTextures extends JavaPlugin{
 		OverlaysCommand regionsHandler = new OverlaysCommand(this);
 		this.getCommand("overlays").setExecutor(regionsHandler);
 		this.getCommand("overlays").setTabCompleter(regionsHandler);
+		Debugger.debug("Registering toggletextures command!");
+		this.getCommand("toggletextures").setExecutor(new ToggleTexturesCommand(this));
 		Debugger.debug("Registering listeners!");
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 	}
