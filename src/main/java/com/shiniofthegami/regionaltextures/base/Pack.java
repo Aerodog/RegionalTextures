@@ -11,7 +11,7 @@ public class Pack {
 	private String packName;
 	
 	public Pack(String packName, String packURL){
-		if(!packURL.startsWith("http")){
+		if(!packURL.startsWith("http")&&!packURL.equals("none")){
 			packURL = "http://" + packURL;
 		}
 		this.packURL = packURL;

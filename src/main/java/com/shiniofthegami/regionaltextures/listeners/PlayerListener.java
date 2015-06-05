@@ -60,6 +60,11 @@ public class PlayerListener implements Listener{
 			PackHandler.applyDefaultPack(p);
 			return;
 		}
+		
+		if(toOverlay.getPack() == fromOverlay.getPack()){
+			return;
+		}
+		
 		toOverlay.getPack().apply(p);
 	}
 }
