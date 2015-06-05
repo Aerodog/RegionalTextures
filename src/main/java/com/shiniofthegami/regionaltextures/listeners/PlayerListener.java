@@ -61,7 +61,13 @@ public class PlayerListener implements Listener{
 			return;
 		}
 		
-		if(toOverlay.getPack() == fromOverlay.getPack()){
+		if(fromOverlay == null){
+			toOverlay.getPack().apply(p);
+			return;
+		}
+		
+		if(toOverlay.getPack().equals(fromOverlay.getPack())){
+			Debugger.debug("Packs " + toOverlay.getPack() + " and " + fromOverlay.getPack() + " identical, not changing (Player: " + p.getDisplayName() + ")");
 			return;
 		}
 		
