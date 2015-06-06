@@ -12,6 +12,7 @@ import com.shiniofthegami.regionaltextures.RegionalTextures;
 import com.shiniofthegami.regionaltextures.base.Pack;
 import com.shiniofthegami.regionaltextures.base.Overlay;
 import com.shiniofthegami.regionaltextures.util.Debugger;
+import com.shiniofthegami.regionaltextures.util.Utils;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
@@ -73,6 +74,7 @@ public class OverlayHandler {
 	}
 	
 	public static Overlay getOverlay(Location l){
+		l = Utils.clampY(l);
 		for(Overlay o : overlays){
 			if(o.getRegion().contains(l.getBlockX(), l.getBlockY(), l.getBlockZ())){
 				return o;
