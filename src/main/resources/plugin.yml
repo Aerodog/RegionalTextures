@@ -34,4 +34,3 @@ commands:
       /usepack automatic - Changes resource pack to the pack at your location (turns automatic changing on)
       /usepack default - Sets resource pack to default pack of the server (turns automatic changing off)
       /usepack <resource pack> - Changes resource pack to the pack spesified (turns automatic changing off)
-    usage: /<command>
