@@ -15,12 +15,28 @@ import com.shiniofthegami.regionaltextures.base.Pack;
 import com.shiniofthegami.regionaltextures.util.Debugger;
 
 public class PackHandler {
+	private static List<String> blacklistedNames = new ArrayList<String>();
+	
 	private static RegionalTextures pl;
 	private static List<Pack> packs = new ArrayList<Pack>();
 	private static Set<UUID> excludedPlayers = new HashSet<UUID>();
 	public static void init(RegionalTextures pl){
 		PackHandler.pl = pl;
+		PackHandler.blacklistName("default");
+		PackHandler.blacklistName("auto");
+		PackHandler.blacklistName("automatic");
+		PackHandler.blacklistName("none");
 		loadPacks();
+	}
+	
+	public static void blacklistName(String name){
+		if(!blacklistedNames.contains(name.toLowerCase())){
+			blacklistedNames.add(name.toLowerCase());
+		}
+	}
+	
+	public static List<String> getBlacklistedNames(){
+		return blacklistedNames;
 	}
 	
 	public static boolean isExcluded(Player p){
@@ -30,15 +46,6 @@ public class PackHandler {
 	public static void setExcluded(Player p, boolean b){
 		if(b != isExcluded(p)){
 			togglePlayer(p);
-		}
-	}
-	
-	public static void setExclusion(Player p, boolean on) {
-		if (on) {
-			excludedPlayers.add(p.getUniqueId());
-		}
-		else {
-			excludedPlayers.remove(p.getUniqueId());
 		}
 	}
 	

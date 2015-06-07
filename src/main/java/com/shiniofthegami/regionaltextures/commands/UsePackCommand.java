@@ -29,25 +29,25 @@ public class UsePackCommand extends CommandHandler {
 		}
 		Player p = (Player) sender;
 		if (args[0].equalsIgnoreCase("default")) {
-			PackHandler.setExclusion(p, true);
+			PackHandler.setExcluded(p, true);
 			PackHandler.applyDefaultPack(p);
 			return true;
 		}
 		if (args[0].equalsIgnoreCase("auto") || args[0].equalsIgnoreCase("automatic")) {
 			Overlay overlay = OverlayHandler.getOverlay(p.getLocation());
 			if (overlay != null && overlay.getPack() != null) {
-				PackHandler.setExclusion(p, false);
+				PackHandler.setExcluded(p, false);
 				overlay.getPack().apply(p);
 			}
 			else if (overlay == null) {
-				PackHandler.setExclusion(p, false);
+				PackHandler.setExcluded(p, false);
 				PackHandler.applyDefaultPack(p);
 			}
 			return true;
 		}
 		Pack pack = PackHandler.getPack(args[0]);
 		if (pack != null) {
-			PackHandler.setExclusion(p, true);
+			PackHandler.setExcluded(p, true);
 			pack.apply(p);
 			return true;
 		}

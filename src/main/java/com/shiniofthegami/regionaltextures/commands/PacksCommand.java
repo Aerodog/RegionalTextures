@@ -1,7 +1,6 @@
 package com.shiniofthegami.regionaltextures.commands;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -16,7 +15,6 @@ import com.shiniofthegami.regionaltextures.handlers.PackHandler;
 import com.shiniofthegami.regionaltextures.util.Debugger;
 
 public class PacksCommand extends CommandHandler implements TabCompleter{
-	static final List<String> blacklist = new ArrayList<String>(Arrays.asList("default", "auto", "automatic"));
 	List<String> arguments = new ArrayList<String>();
 	public PacksCommand(RegionalTextures pl) {
 		super(pl);
@@ -43,7 +41,7 @@ public class PacksCommand extends CommandHandler implements TabCompleter{
 			}
 			String name = args[1];
 			String url = args[2];
-			if (blacklist.contains(name.toLowerCase())) {
+			if (PackHandler.getBlacklistedNames().contains(name.toLowerCase())) {
 				sender.sendMessage(ChatColor.AQUA + name + ChatColor.RED + " is already used by RegionalTextures!");
 				return true;
 			}
