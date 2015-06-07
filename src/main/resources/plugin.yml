@@ -23,11 +23,9 @@ commands:
       /overlays remove <name> - removes an overlay
       /overlays update - updates the overlays to use changed pack URLs
   toggletextures:
-    permissions: regionaltextures.toggle
     description: Toggles whether or not the regional textures get applied to you
     usage: /<command>
   usepack:
-    permissions: regionaltextures.usepack
     description: Sets resourcepack for you
     usage: |
       USAGE:
