@@ -25,14 +25,20 @@ public class PackHandler {
 		return excludedPlayers.contains(p.getUniqueId());
 	}
 	
+	public static void setExcluded(Player p, boolean b){
+		if(b != isExcluded(p)){
+			togglePlayer(p);
+		}
+	}
+	
 	public static void togglePlayer(Player p){
 		if(excludedPlayers.contains(p.getUniqueId())){
 			excludedPlayers.remove(p.getUniqueId());
-			p.sendMessage(ChatColor.AQUA + "You are now no longer excluded from the Server Textures changing. Reconnect to the Server to apply this change.");
+			p.sendMessage(ChatColor.AQUA + "Server Textures now change per region.");
 			Debugger.debug("Including player " + p.getName() + " in automatic changing!");
 		}else{
 			excludedPlayers.add(p.getUniqueId());
-			p.sendMessage(ChatColor.AQUA + "You are now excluded from the Server Textures changing. Reconnect to the Server to apply this change.");
+			p.sendMessage(ChatColor.AQUA + "Excluding you from regional Resource Pack changes. Reconnect to use local (downloaded) resource packs.");
 			Debugger.debug("Excluding player " + p.getName() + " from automatic changing!");
 		}
 		
