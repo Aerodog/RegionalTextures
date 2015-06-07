@@ -7,12 +7,16 @@ public class Utils {
 	
 	public final static int MAX_WORLD_HEIGHT = Bukkit.getServer().getWorlds().get(0).getMaxHeight();
 	
-	public static Location clampY(Location l){
+	static{
+		Debugger.debug("Max world height : " + MAX_WORLD_HEIGHT);
+	}
+	
+	public static int getClampedY(Location l){
 		if(l.getBlockY() > MAX_WORLD_HEIGHT){
-			l.setY(MAX_WORLD_HEIGHT);
+			return MAX_WORLD_HEIGHT;
 		}else if(l.getBlockY() < 0){
-			l.setY(0);
+			return 0;
 		}
-		return l;
+		return l.getBlockY();
 	}
 }
