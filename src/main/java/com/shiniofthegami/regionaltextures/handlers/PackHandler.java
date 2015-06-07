@@ -1,7 +1,9 @@
 package com.shiniofthegami.regionaltextures.handlers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
@@ -15,7 +17,7 @@ import com.shiniofthegami.regionaltextures.util.Debugger;
 public class PackHandler {
 	private static RegionalTextures pl;
 	private static List<Pack> packs = new ArrayList<Pack>();
-	private static List<UUID> excludedPlayers = new ArrayList<UUID>();
+	private static Set<UUID> excludedPlayers = new HashSet<UUID>();
 	public static void init(RegionalTextures pl){
 		PackHandler.pl = pl;
 		loadPacks();
@@ -28,6 +30,15 @@ public class PackHandler {
 	public static void setExcluded(Player p, boolean b){
 		if(b != isExcluded(p)){
 			togglePlayer(p);
+		}
+	}
+	
+	public static void setExclusion(Player p, boolean on) {
+		if (on) {
+			excludedPlayers.add(p.getUniqueId());
+		}
+		else {
+			excludedPlayers.remove(p.getUniqueId());
 		}
 	}
 	
