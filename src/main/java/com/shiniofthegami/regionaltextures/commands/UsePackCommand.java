@@ -1,5 +1,6 @@
 package com.shiniofthegami.regionaltextures.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,35 +29,29 @@ public class UsePackCommand extends CommandHandler {
 		}
 		Player p = (Player) sender;
 		if (args[0].equalsIgnoreCase("default")) {
-			setExclusion(p, true);
+			PackHandler.setExclusion(p, true);
 			PackHandler.applyDefaultPack(p);
 			return true;
 		}
 		if (args[0].equalsIgnoreCase("auto") || args[0].equalsIgnoreCase("automatic")) {
 			Overlay overlay = OverlayHandler.getOverlay(p.getLocation());
 			if (overlay != null && overlay.getPack() != null) {
-				setExclusion(p, false);
+				PackHandler.setExclusion(p, false);
 				overlay.getPack().apply(p);
 			}
 			else if (overlay == null) {
-				setExclusion(p, false);
+				PackHandler.setExclusion(p, false);
 				PackHandler.applyDefaultPack(p);
 			}
 			return true;
 		}
-		for (Pack pack : PackHandler.getPacks()) {
-			if(pack.getName().equalsIgnoreCase(args[0])) {
-				setExclusion(p, true);
-				pack.apply(p);
-				return true;
-			}
+		Pack pack = PackHandler.getPack(args[0]);
+		if (pack != null) {
+			PackHandler.setExclusion(p, true);
+			pack.apply(p);
+			return true;
 		}
-		return false;
-	}
-	
-	private static void setExclusion(Player p, boolean on) {
-		if ((PackHandler.isExcluded(p) && !on) || (!PackHandler.isExcluded(p) && on)) {
-			PackHandler.togglePlayer(p);
-		}
+		sender.sendMessage(ChatColor.RED + "Resource pack could not be found!");
+		return true;
 	}
 }
