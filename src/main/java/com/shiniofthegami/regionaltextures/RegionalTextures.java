@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.shiniofthegami.regionaltextures.commands.PacksCommand;
 import com.shiniofthegami.regionaltextures.commands.OverlaysCommand;
 import com.shiniofthegami.regionaltextures.commands.ToggleTexturesCommand;
+import com.shiniofthegami.regionaltextures.commands.UsePackCommand;
 import com.shiniofthegami.regionaltextures.handlers.PackHandler;
 import com.shiniofthegami.regionaltextures.handlers.OverlayHandler;
 import com.shiniofthegami.regionaltextures.listeners.PlayerListener;
@@ -19,20 +20,30 @@ public class RegionalTextures extends JavaPlugin{
 	public void onEnable(){
 		Debugger.debug("LOADING REGIONALTEXTURES CONFIG");
 		this.saveDefaultConfig();
+		
 		Debugger.debug("Initializing PackHandler!");
 		PackHandler.init(this);
+		
 		Debugger.debug("Initializing OverlayHandler!");
 		OverlayHandler.init(this);
+		
 		Debugger.debug("Registering packs command!");
 		PacksCommand packsHandler = new PacksCommand(this);
 		this.getCommand("packs").setExecutor(packsHandler);
 		this.getCommand("packs").setTabCompleter(packsHandler);
+		
 		Debugger.debug("Registering overlays command!");
 		OverlaysCommand regionsHandler = new OverlaysCommand(this);
 		this.getCommand("overlays").setExecutor(regionsHandler);
 		this.getCommand("overlays").setTabCompleter(regionsHandler);
+		
 		Debugger.debug("Registering toggletextures command!");
 		this.getCommand("toggletextures").setExecutor(new ToggleTexturesCommand(this));
+		
+		Debugger.debug("Registering usepack command!");
+		this.getCommand("usepack").setExecutor(new UsePackCommand(this));
+		
+		
 		Debugger.debug("Registering listeners!");
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 	}
