@@ -76,7 +76,6 @@ public class OverlayHandler {
 	public static Overlay getOverlay(Location l){
 		for(Overlay o : overlays){
 			if(o.getRegion().contains(l.getBlockX(), Utils.getClampedY(l), l.getBlockZ())){
-				Debugger.debug("Overlay at location (" + l.getBlockX() + "," + Utils.getClampedY(l) + "," + l.getBlockZ() + ") : " + o);
 				return o;
 			}
 		}

@@ -12,8 +12,8 @@ public class Utils {
 	}
 	
 	public static int getClampedY(Location l){
-		if(l.getBlockY() > MAX_WORLD_HEIGHT){
-			return MAX_WORLD_HEIGHT;
+		if(l.getBlockY() >= MAX_WORLD_HEIGHT){
+			return MAX_WORLD_HEIGHT-1;
 		}else if(l.getBlockY() < 0){
 			return 0;
 		}
