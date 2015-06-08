@@ -43,6 +43,7 @@ public class OverlayHandler {
 			pl.getConfig().set("overlays." + o.getName() + ".region", o.getRegion().getId());
 			pl.getConfig().set("overlays." + o.getName() + ".world", o.getWorld().getName());
 			pl.getConfig().set("overlays." + o.getName() + ".pack", o.getPack().getName());
+			pl.getConfig().set("overlays." + o.getName() + ".weight", o.getWeight());
 		}
 		pl.saveConfig();
 	}
@@ -74,12 +75,25 @@ public class OverlayHandler {
 	}
 	
 	public static Overlay getOverlay(Location l){
+		List<Overlay> inRegion = new ArrayList<Overlay>();
 		for(Overlay o : overlays){
 			if(o.getRegion().contains(l.getBlockX(), Utils.getClampedY(l), l.getBlockZ())){
-				return o;
+				inRegion.add(o);
 			}
 		}
-		return null;
+		//Overlay top = inRegion.stream().reduce((a,b) -> compareWeight(a, b)).get(); Needs 1.8 compliance for the project :(
+		if (inRegion.isEmpty()) {
+			return null;
+		}
+		while(inRegion.size() > 1) {
+			if (inRegion.get(0).getWeight() <= inRegion.get(1).getWeight()) {
+				inRegion.remove(inRegion.get(0));
+			}
+			else {
+				inRegion.remove(inRegion.get(1));
+			}
+		}
+		return inRegion.get(0);
 	}
 	
 	public static List<ProtectedRegion> getRegions(){
@@ -101,6 +115,7 @@ public class OverlayHandler {
 			String regionname = overlays.getString(key + ".region");
 			String worldname = overlays.getString(key + ".world");
 			String packname = overlays.getString(key + ".pack");
+			String weight = overlays.getString(key + ".weight");
 			if(regionname == null){
 				Debugger.debug("WorldGuard Region name not defined for overlay" + key + "!");
 				continue;
@@ -112,6 +127,10 @@ public class OverlayHandler {
 			if(packname == null){
 				Debugger.debug("Pack name not defined for overlay" + key + "!");
 				continue;
+			}
+			if (weight == null || !weight.replace("[^0-9]", "").equals(weight)) {
+				weight = "0";
+				Debugger.debug("Weight not found for overlay" + key + "!");
 			}
 			World world = Bukkit.getWorld(worldname);
 			if(world == null){
@@ -134,6 +153,7 @@ public class OverlayHandler {
 				continue;
 			}
 			Overlay o = new Overlay(region, key, pack, world);
+			o.setWeight(Integer.valueOf(weight));
 			addOverlay(o);
 			Debugger.debug("Loaded region " + o.toString());
 		}

@@ -12,17 +12,18 @@ commands:
     usage: |
       USAGE:
       /packs list - Lists all current packs
-      /packs add <name> <url> - adds a pack
-      /packs remove <name> - removes a pack
+      /packs add <name> <url> - Adds a pack
+      /packs remove <name> - Removes a pack
   overlays:
     permission: regionaltextures.manage.overlays
     description: manage overlays
     usage: |
       USAGE:
       /overlays list - Lists all current overlays
-      /overlays add <name> <region> <pack> - adds an overlay
-      /overlays remove <name> - removes an overlay
-      /overlays update - updates the overlays to use changed pack URLs
+      /overlays add <name> <region> <pack> - Adds an overlay
+      /overlays remove <name> - Removes an overlay
+      /overlays weight <weight> - Sets priority for overlay (priority by highest weight)
+      /overlays update - Updates the overlays to use changed pack URLs
   toggletextures:
     description: Toggles whether or not the regional textures get applied to you
     usage: /<command>
