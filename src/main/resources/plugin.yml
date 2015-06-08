@@ -21,11 +21,8 @@ commands:
       /overlays list - Lists all current overlays
       /overlays add <name> <region> <pack> - Adds an overlay
       /overlays remove <name> - Removes an overlay
-      /overlays weight <weight> - Sets priority for overlay (priority by highest weight)
+      /overlays weight <name> <weight number> - Sets priority for overlay (priority by highest weight)
       /overlays update - Updates the overlays to use changed pack URLs
-  toggletextures:
-    description: Toggles whether or not the regional textures get applied to you
-    usage: /<command>
   usepack:
     description: Sets resourcepack for you
     usage: |
