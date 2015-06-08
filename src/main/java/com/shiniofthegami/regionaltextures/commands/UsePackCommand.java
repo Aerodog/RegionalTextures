@@ -45,6 +45,10 @@ public class UsePackCommand extends CommandHandler {
 			}
 			return true;
 		}
+		if(args[0].equalsIgnoreCase("custom")){
+			PackHandler.setExcluded(p, true);
+			return true;
+		}
 		Pack pack = PackHandler.getPack(args[0]);
 		if (pack != null) {
 			PackHandler.setExcluded(p, true);

@@ -25,6 +25,7 @@ public class PackHandler {
 		PackHandler.blacklistName("default");
 		PackHandler.blacklistName("auto");
 		PackHandler.blacklistName("automatic");
+		PackHandler.blacklistName("custom");
 		PackHandler.blacklistName("none");
 		loadPacks();
 	}

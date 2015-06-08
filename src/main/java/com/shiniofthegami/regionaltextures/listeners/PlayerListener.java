@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 import com.shiniofthegami.regionaltextures.base.Overlay;
+import com.shiniofthegami.regionaltextures.base.Pack;
 import com.shiniofthegami.regionaltextures.handlers.OverlayHandler;
 import com.shiniofthegami.regionaltextures.handlers.PackHandler;
 import com.shiniofthegami.regionaltextures.util.Debugger;
@@ -42,7 +43,7 @@ public class PlayerListener implements Listener{
 			PackHandler.applyDefaultPack(p);
 			return;
 		}
-		o.getPack().apply(p);
+		this.applyPack(o, p);
 	}
 	
 	public void handle(Player p, Location from, Location to){
@@ -62,7 +63,7 @@ public class PlayerListener implements Listener{
 		}
 		
 		if(fromOverlay == null){
-			toOverlay.getPack().apply(p);
+			this.applyPack(toOverlay, p);
 			return;
 		}
 		
@@ -70,7 +71,13 @@ public class PlayerListener implements Listener{
 			Debugger.debug("Packs " + toOverlay.getPack() + " and " + fromOverlay.getPack() + " identical, not changing (Player: " + p.getDisplayName() + ")");
 			return;
 		}
-		
-		toOverlay.getPack().apply(p);
+		this.applyPack(toOverlay, p);
+	}
+	
+	private void applyPack(Overlay o, Player p){
+		Pack pack = o.getPack();
+		if(pack != null){
+			pack.apply(p);
+		}
 	}
 }
