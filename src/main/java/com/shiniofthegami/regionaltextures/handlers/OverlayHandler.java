@@ -42,7 +42,7 @@ public class OverlayHandler {
 		for(Overlay o : overlays){
 			pl.getConfig().set("overlays." + o.getName() + ".region", o.getRegion().getId());
 			pl.getConfig().set("overlays." + o.getName() + ".world", o.getWorld().getName());
-			pl.getConfig().set("overlays." + o.getName() + ".pack", o.getPack().getName());
+			pl.getConfig().set("overlays." + o.getName() + ".pack", ((o.getPack() == null)?"custom":o.getPack().getName()));
 		}
 		pl.saveConfig();
 	}
@@ -128,10 +128,13 @@ public class OverlayHandler {
 				Debugger.debug(key + ": WorldGuard region '" + regionname + "' not found!");
 				continue;
 			}
-			Pack pack = PackHandler.getPack(packname);
+			Pack pack = null;
+			if(!packname.equalsIgnoreCase("custom")){
+				 pack = PackHandler.getPack(packname);
 			if(pack == null){
 				Debugger.debug(key + ": Pack '" + packname + "' not found!");
 				continue;
+			}
 			}
 			Overlay o = new Overlay(region, key, pack, world);
 			addOverlay(o);

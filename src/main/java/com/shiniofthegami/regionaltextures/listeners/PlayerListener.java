@@ -67,14 +67,25 @@ public class PlayerListener implements Listener{
 			return;
 		}
 		
-		if(toOverlay.getPack().equals(fromOverlay.getPack())){
+		if(toOverlay.getPack() == (fromOverlay.getPack())){
 			Debugger.debug("Packs " + toOverlay.getPack() + " and " + fromOverlay.getPack() + " identical, not changing (Player: " + p.getDisplayName() + ")");
 			return;
 		}
+		if(toOverlay.getPack() == null){
+			PackHandler.setExcluded(p,true);
+			p.sendMessage(ChatColor.GOLD + "NOTE:" + ChatColor.GRAY +  "You have entered a custmizable region and are excluded from automatic texture changing!");
+			return;
+		}
+		if(fromOverlay.getPack() == null){
+			p.sendMessage(ChatColor.AQUA + "Leaving customizable region!");
+			
+		if(PackHandler.isExcluded(p)){
+			p.sendMessage(ChatColor.AQUA + "Type" + ChatColor.GOLD + "/usepack automatic" + ChatColor.AQUA + "to enable automatic texture changes.");
+			return;
+		}
+		}
 		this.applyPack(toOverlay, p);
 	}
-
-	//Check to see if pack is null
 	private void applyPack(Overlay o, Player p){
 		Pack pack = o.getPack();
 		if(pack != null){

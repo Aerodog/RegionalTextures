@@ -78,8 +78,7 @@ public class OverlaysCommand extends CommandHandler implements TabCompleter{
 				sender.sendMessage(ChatColor.RED + "Pack '" + packName + "' not found!");
 				return true;
 			}
-			}
-			
+			}	
 			Overlay o = new Overlay(region, name, pack, p.getWorld());
 			OverlayHandler.addOverlay(o);
 			OverlayHandler.saveOverlays();
