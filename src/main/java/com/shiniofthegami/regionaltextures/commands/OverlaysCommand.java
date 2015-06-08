@@ -16,6 +16,7 @@ import com.shiniofthegami.regionaltextures.base.Pack;
 import com.shiniofthegami.regionaltextures.handlers.OverlayHandler;
 import com.shiniofthegami.regionaltextures.handlers.PackHandler;
 import com.shiniofthegami.regionaltextures.util.Debugger;
+import com.shiniofthegami.regionaltextures.util.Utils;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
@@ -110,11 +111,12 @@ public class OverlaysCommand extends CommandHandler implements TabCompleter{
 			return true;
 		}
 		if(args[0].equalsIgnoreCase("weight")){
-			if(args.length < 3 || !args[2].replace("[^0-9]", "").equals(args[2])){
+			if(args.length < 3 || !Utils.isAnyInt(args[2])){
 				return false;
 			}
+			Debugger.debug("Overlay weight command: Number: " + args[2] + " Number validation: " + !Utils.isAnyInt(args[2]));
 			String name = args[1];
-			int weight = Integer.valueOf(args[2]);
+			int weight = Utils.getClampedInt(args[2]);
 			Overlay o = OverlayHandler.getOverlay(name);
 			if(o == null){
 				sender.sendMessage(ChatColor.RED + "Overlay " + ChatColor.AQUA + name + ChatColor.RED + " not found!");
@@ -140,6 +142,4 @@ public class OverlaysCommand extends CommandHandler implements TabCompleter{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-
 }
