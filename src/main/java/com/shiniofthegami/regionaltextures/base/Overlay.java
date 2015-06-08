@@ -10,12 +10,21 @@ public class Overlay {
 	private String name;
 	private Pack pack;
 	private World world;
+	private int weight;
 	
 	public Overlay(ProtectedRegion region, String name, Pack pack, World world){
 		this.region = region;
 		this.name = name;
 		this.pack = pack;
 		this.world = world;
+	}
+	
+	public void setWeight(int weight){
+		this.weight = weight;
+	}
+	
+	public int getWeight(){
+		return weight;
 	}
 	
 	public String getName(){
@@ -35,6 +44,6 @@ public class Overlay {
 	}
 	
 	public String toString(){
-		return "(" + this.getName() + ", " + this.getRegion().getId() + ", " + ((this.getPack() == null)?"custom Pack":this.getPack()) + "," + this.getWorld().getName() + ")";
+		return "(" + this.getName() + ", " + this.getRegion().getId() + ", " + ((this.getPack() == null)?"custom Pack":this.getPack()) + "," + this.getWorld().getName() + "," + this.getWeight() + ")";
 	}
 }

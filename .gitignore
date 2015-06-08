@@ -8,3 +8,4 @@ src/test/*
 .project
 bin
 bin/*
+.DS_STORE
