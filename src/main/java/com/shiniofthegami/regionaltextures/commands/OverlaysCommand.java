@@ -27,6 +27,7 @@ public class OverlaysCommand extends CommandHandler implements TabCompleter{
 		arguments.add("add");
 		arguments.add("remove");
 		arguments.add("update");
+		arguments.add("weight");
 	}
 
 	public boolean onCommand(CommandSender sender, Command command,
@@ -108,13 +109,29 @@ public class OverlaysCommand extends CommandHandler implements TabCompleter{
 			Debugger.debug("Overlay update command: Overlays updated!");
 			return true;
 		}
+		if(args[0].equalsIgnoreCase("weight")){
+			if(args.length < 3 || !args[2].replace("[^0-9]", "").equals(args[2])){
+				return false;
+			}
+			String name = args[1];
+			int weight = Integer.valueOf(args[2]);
+			Overlay o = OverlayHandler.getOverlay(name);
+			if(o == null){
+				sender.sendMessage(ChatColor.RED + "Overlay " + ChatColor.AQUA + name + ChatColor.RED + " not found!");
+				return true;
+			}
+			o.setWeight(weight);
+			sender.sendMessage(ChatColor.GRAY + "Weight " + ChatColor.AQUA + weight + ChatColor.GRAY + " set to " + ChatColor.AQUA + name);
+			Debugger.debug("Overlay weight command: " + weight + " set to " + name);
+			return true;
+		}
 		return false;
 	}
 	
 	public void printList(CommandSender sender){
-		sender.sendMessage(ChatColor.GRAY + "Regions listed as: " + ChatColor.AQUA + "NAME" + ChatColor.GRAY + " - " + ChatColor.AQUA + "REGION ID" + ChatColor.GRAY + " - " + ChatColor.AQUA + "PACK");
+		sender.sendMessage(ChatColor.GRAY + "Regions listed as: " + ChatColor.AQUA + "NAME" + ChatColor.GRAY + " - " + ChatColor.AQUA + "REGION ID" + ChatColor.GRAY + " - " + ChatColor.AQUA + "PACK" + ChatColor.GRAY + " - " + ChatColor.AQUA + "WEIGHT");
 		for(Overlay o : OverlayHandler.getOverlays()){
-			sender.sendMessage(ChatColor.AQUA + o.getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getRegion().getId() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getPack().getName());
+			sender.sendMessage(ChatColor.AQUA + o.getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getRegion().getId() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getPack().getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getWeight());
 		}
 	}
 	
