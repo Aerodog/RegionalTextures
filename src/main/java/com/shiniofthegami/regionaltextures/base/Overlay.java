@@ -35,6 +35,6 @@ public class Overlay {
 	}
 	
 	public String toString(){
-		return "(" + this.getName() + ", " + this.getRegion().getId() + ", " + this.getPack() + "," + this.getWorld().getName() + ")";
+		return "(" + this.getName() + ", " + this.getRegion().getId() + ", " + ((this.getPack() == null)?"custom Pack":this.getPack()) + "," + this.getWorld().getName() + ")";
 	}
 }

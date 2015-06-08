@@ -73,7 +73,8 @@ public class PlayerListener implements Listener{
 		}
 		this.applyPack(toOverlay, p);
 	}
-	
+
+	//Check to see if pack is null
 	private void applyPack(Overlay o, Player p){
 		Pack pack = o.getPack();
 		if(pack != null){
