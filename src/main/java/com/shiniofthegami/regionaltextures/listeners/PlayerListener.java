@@ -47,9 +47,7 @@ public class PlayerListener implements Listener{
 	}
 	
 	public void handle(Player p, Location from, Location to){
-		if(PackHandler.isExcluded(p)){
-			return;
-		}
+
 		Overlay fromOverlay = OverlayHandler.getOverlay(from);
 		Overlay toOverlay = OverlayHandler.getOverlay(to);
 		
@@ -67,14 +65,34 @@ public class PlayerListener implements Listener{
 			return;
 		}
 		
-		if(toOverlay.getPack().equals(fromOverlay.getPack())){
+		if(toOverlay.getPack() == (fromOverlay.getPack())){
 			Debugger.debug("Packs " + toOverlay.getPack() + " and " + fromOverlay.getPack() + " identical, not changing (Player: " + p.getDisplayName() + ")");
 			return;
+			
+		}
+		if(toOverlay.getPack() == null){
+			PackHandler.setExcluded(p,true);
+			p.sendMessage(ChatColor.GOLD + "NOTE:" + ChatColor.GRAY +  "You have entered a custmizable region and are excluded from automatic texture changing!");
+			
+		if(PackHandler.isExcluded(p)){
+			p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
+			return;
+		}
+		}
+		if(fromOverlay.getPack() == null){
+			p.sendMessage(ChatColor.AQUA + "Leaving customizable region!");
+			
+		if(PackHandler.isExcluded(p)){
+			p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
+			return;
+		}
 		}
 		this.applyPack(toOverlay, p);
 	}
-	
 	private void applyPack(Overlay o, Player p){
+		if(PackHandler.isExcluded(p)){
+			return;
+		}
 		Pack pack = o.getPack();
 		if(pack != null){
 			pack.apply(p);
