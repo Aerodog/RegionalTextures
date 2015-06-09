@@ -128,7 +128,7 @@ public class OverlayHandler {
 				Debugger.debug("Pack name not defined for overlay" + key + "!");
 				continue;
 			}
-			if (weight == null || !weight.replace("[^0-9]", "").equals(weight)) {
+			if (weight == null || !Utils.isAnyInt(weight)) {
 				weight = "0";
 				Debugger.debug("Weight not found for overlay" + key + "!");
 			}
@@ -153,7 +153,7 @@ public class OverlayHandler {
 				continue;
 			}
 			Overlay o = new Overlay(region, key, pack, world);
-			o.setWeight(Integer.valueOf(weight));
+			o.setWeight(Utils.getClampedInt(weight));
 			addOverlay(o);
 			Debugger.debug("Loaded region " + o.toString());
 		}
