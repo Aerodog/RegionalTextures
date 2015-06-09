@@ -15,7 +15,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class RegionalTextures extends JavaPlugin{
 	
-	private final WorldGuardPlugin worldguardPlugin = WGBukkit.getPlugin();
+	private final WorldGuardPlugin worldGuardPlugin = WGBukkit.getPlugin();
 	public void onEnable(){
 		Debugger.debug("LOADING REGIONALTEXTURES CONFIG");
 		this.saveDefaultConfig();
@@ -39,12 +39,11 @@ public class RegionalTextures extends JavaPlugin{
 		Debugger.debug("Registering usepack command!");
 		this.getCommand("usepack").setExecutor(new UsePackCommand(this));
 		
-		
 		Debugger.debug("Registering listeners!");
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 	}
 	
 	public WorldGuardPlugin getWorldGuard(){
-		return worldguardPlugin;
+		return worldGuardPlugin;
 	}
 }

@@ -23,32 +23,39 @@ public class PacksCommand extends CommandHandler implements TabCompleter{
 		arguments.add("remove");
 	}
 
-	public boolean onCommand(CommandSender sender, Command command,
-			String label, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
+		
 		if(args.length < 1){
 			return false;
 		}
+		
 		if(!arguments.contains(args[0])){
 			return false;
 		}
+		
 		if(args[0].equalsIgnoreCase("list")){
 			printList(sender);
 			return true;
 		}
+		
 		if(args[0].equalsIgnoreCase("add")){
+			
 			if(args.length < 3){
 				return false;
 			}
+			
 			String name = args[1];
 			String url = args[2];
 			if (PackHandler.getBlacklistedNames().contains(name.toLowerCase())) {
 				sender.sendMessage(ChatColor.AQUA + name + ChatColor.RED + " is already used by RegionalTextures!");
 				return true;
 			}
+			
 			if(PackHandler.getPack(name)!=null){
 				sender.sendMessage(ChatColor.RED + "A Pack with the name " + ChatColor.AQUA + name + ChatColor.RED + " already exists!");
 				return true;
 			}
+			
 			Pack p = new Pack(name, url);
 			PackHandler.addPack(p);
 			PackHandler.savePacks();
@@ -56,17 +63,22 @@ public class PacksCommand extends CommandHandler implements TabCompleter{
 			Debugger.debug("Pack " + p + " added via command");
 			return true;
 		}
+		
 		if(args[0].equalsIgnoreCase("remove")){
+			
 			if(args.length < 2){
 				return false;
 			}
+			
 			String name = args[1];
 			Pack p = PackHandler.getPack(name);
+			
 			if(p == null){
 				sender.sendMessage(ChatColor.RED + "Pack " + ChatColor.AQUA + name + ChatColor.RED + " not found!");
 				Debugger.debug("Pack remove command: Pack " + name + " not found!");
 				return true;
 			}
+			
 			PackHandler.removePack(p);
 			sender.sendMessage(ChatColor.GRAY + "Pack " + ChatColor.AQUA + name + ChatColor.GRAY + " removed!");
 			Debugger.debug("Pack remove command: Pack " + name + " removed!");
@@ -78,21 +90,24 @@ public class PacksCommand extends CommandHandler implements TabCompleter{
 	public void printList(CommandSender sender){
 		sender.sendMessage(ChatColor.AQUA + "Default pack: " + ChatColor.GREEN + pl.getConfig().getString("default"));
 		sender.sendMessage(ChatColor.GRAY + "Packs listed as: " + ChatColor.AQUA + "NAME" + ChatColor.GRAY + " - " + ChatColor.AQUA + "URL");
+		
 		for(Pack p : PackHandler.getPacks()){
 			sender.sendMessage(ChatColor.AQUA + p.getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + p.getURL());
 		}
 	}
 	
-	public List<String> onTabComplete(CommandSender sender, Command command,
-			String alias, String[] args) {
+	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+		
 		if(args.length == 1 && args[0] == ""){
 			return arguments;
 		}
+		
 		if(args.length == 2 && args[1] == ""){
 			if(args[0].equalsIgnoreCase("remove")){
 				return PackHandler.getPackNames();
 			}
 		}
+		
 		return null;
 	}
 

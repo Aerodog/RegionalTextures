@@ -97,6 +97,10 @@ public class PackHandler {
 		clearPacks();
 		ConfigurationSection packs = pl.getConfig().getConfigurationSection("packs");
 		for(String key : packs.getKeys(false)){
+			if(PackHandler.getBlacklistedNames().contains(key)){
+				Debugger.debug("Name " + key + " is blacklisted, skipping.");
+				continue;
+			}
 			String packURL = packs.getString(key + ".url");
 			if(packURL == null){
 				Debugger.debug("Pack URL not defined for pack" + key + "!");
