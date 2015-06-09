@@ -75,7 +75,7 @@ public class PlayerListener implements Listener{
 			p.sendMessage(ChatColor.GOLD + "NOTE:" + ChatColor.GRAY +  "You have entered a custmizable region and are excluded from automatic texture changing!");
 			
 		if(PackHandler.isExcluded(p)){
-			p.sendMessage(ChatColor.AQUA + "Type" + ChatColor.GOLD + "/usepack automatic" + ChatColor.AQUA + "to enable automatic texture changes!");
+			p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
 			return;
 		}
 		}
@@ -83,7 +83,7 @@ public class PlayerListener implements Listener{
 			p.sendMessage(ChatColor.AQUA + "Leaving customizable region!");
 			
 		if(PackHandler.isExcluded(p)){
-			p.sendMessage(ChatColor.AQUA + "Type" + ChatColor.GOLD + " /usepack automatic" + ChatColor.AQUA + " to enable automatic texture changes!");
+			p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
 			return;
 		}
 		}
