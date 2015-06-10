@@ -150,10 +150,10 @@ public class OverlayHandler {
 			Pack pack = null;
 			if(!packname.equalsIgnoreCase("custom")){
 				 pack = PackHandler.getPack(packname);
-			if(pack == null){
-				Debugger.debug(key + ": Pack '" + packname + "' not found!");
-				continue;
-			}
+				 if(pack == null){
+					 Debugger.debug(key + ": Pack '" + packname + "' not found!");
+					 continue;
+				 }
 			}
 			Overlay o = new Overlay(region, key, pack, world);
 			o.setWeight(Utils.getClampedInt(weight));

@@ -74,13 +74,14 @@ public class OverlaysCommand extends CommandHandler implements TabCompleter{
 			}
 			Pack pack = null;
 			if(!packName.equalsIgnoreCase("custom")){
-			 pack = PackHandler.getPack(packName);
-			if(pack == null){
-				Debugger.debug("Overlay add command: Pack '" + packName + "' not found!");
-				sender.sendMessage(ChatColor.RED + "Pack '" + packName + "' not found!");
-				return true;
-			}
+				pack = PackHandler.getPack(packName);
+				if(pack == null){
+					Debugger.debug("Overlay add command: Pack '" + packName + "' not found!");
+					sender.sendMessage(ChatColor.RED + "Pack '" + packName + "' not found!");
+					return true;
+				}
 			}	
+			
 			Overlay o = new Overlay(region, name, pack, p.getWorld());
 			OverlayHandler.addOverlay(o);
 			OverlayHandler.saveOverlays();

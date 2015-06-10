@@ -72,20 +72,20 @@ public class PlayerListener implements Listener{
 		}
 		if(toOverlay.getPack() == null){
 			PackHandler.setExcluded(p,true);
-			p.sendMessage(ChatColor.GOLD + "NOTE:" + ChatColor.GRAY +  "You have entered a custmizable region and are excluded from automatic texture changing!");
+			p.sendMessage(ChatColor.GOLD + "NOTE:" + ChatColor.GRAY +  "You have entered a customizable region and are excluded from automatic texture changing!");
 			
-		if(PackHandler.isExcluded(p)){
-			p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
-			return;
-		}
+			if(PackHandler.isExcluded(p)){
+				p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
+				return;
+			}
 		}
 		if(fromOverlay.getPack() == null){
 			p.sendMessage(ChatColor.AQUA + "Leaving customizable region!");
 			
-		if(PackHandler.isExcluded(p)){
-			p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
-			return;
-		}
+			if(PackHandler.isExcluded(p)){
+				p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
+				return;
+			}
 		}
 		this.applyPack(toOverlay, p);
 	}
