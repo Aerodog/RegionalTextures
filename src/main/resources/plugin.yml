@@ -1,8 +1,8 @@
 name: RegionalTextures
-version: 1.0.0-RELEASE
+version: 2.0.0-RELEASE
 main: com.shiniofthegami.regionaltextures.RegionalTextures
 author: ShiniOfTheGami
-authors: [DukeVindzor]
+authors: [DukeVindzor, AceDexter]
 depend: [WorldGuard]
 
 commands:

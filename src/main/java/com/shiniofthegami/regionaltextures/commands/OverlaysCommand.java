@@ -137,7 +137,7 @@ public class OverlaysCommand extends CommandHandler implements TabCompleter{
 	public void printList(CommandSender sender){
 		sender.sendMessage(ChatColor.GRAY + "Regions listed as: " + ChatColor.AQUA + "NAME" + ChatColor.GRAY + " - " + ChatColor.AQUA + "REGION ID" + ChatColor.GRAY + " - " + ChatColor.AQUA + "PACK" + ChatColor.GRAY + " - " + ChatColor.AQUA + "WEIGHT");
 		for(Overlay o : OverlayHandler.getOverlays()){
-			sender.sendMessage(ChatColor.AQUA + o.getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getRegion().getId() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getPack().getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getWeight());
+			sender.sendMessage(ChatColor.AQUA + o.getName() + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getRegion().getId() + ChatColor.GRAY + " - " + ChatColor.AQUA + ((o.getPack() == null)?"custom":o.getPack().getName()) + ChatColor.GRAY + " - " + ChatColor.AQUA + o.getWeight());
 		}
 	}
 	

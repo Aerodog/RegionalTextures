@@ -56,12 +56,12 @@ public class PlayerListener implements Listener{
 		}
 		
 		if(toOverlay == null){
-			PackHandler.applyDefaultPack(p);
+			this.exitRegion(p, fromOverlay, toOverlay);
 			return;
 		}
 		
 		if(fromOverlay == null){
-			this.applyPack(toOverlay, p);
+			this.enterRegion(p, fromOverlay, toOverlay);
 			return;
 		}
 		
@@ -71,23 +71,13 @@ public class PlayerListener implements Listener{
 			
 		}
 		if(toOverlay.getPack() == null){
-			PackHandler.setExcluded(p,true);
-			p.sendMessage(ChatColor.GOLD + "NOTE:" + ChatColor.GRAY +  "You have entered a customizable region and are excluded from automatic texture changing!");
-			
-			if(PackHandler.isExcluded(p)){
-				p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
-				return;
-			}
+			this.enterCustomRegion(p, fromOverlay, toOverlay);
+			return;
 		}
 		if(fromOverlay.getPack() == null){
-			p.sendMessage(ChatColor.AQUA + "Leaving customizable region!");
-			
-			if(PackHandler.isExcluded(p)){
-				p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
-				return;
-			}
+			this.exitCustomRegion(p, fromOverlay, toOverlay);
 		}
-		this.applyPack(toOverlay, p);
+		this.enterRegion(p, fromOverlay, toOverlay);
 	}
 	private void applyPack(Overlay o, Player p){
 		if(PackHandler.isExcluded(p)){
@@ -96,6 +86,39 @@ public class PlayerListener implements Listener{
 		Pack pack = o.getPack();
 		if(pack != null){
 			pack.apply(p);
+		}
+	}
+	
+	private void enterCustomRegion(Player p, Overlay from, Overlay to){
+		PackHandler.setExcluded(p,true);
+		p.sendMessage(ChatColor.GOLD + "NOTE: " + ChatColor.GRAY +  "You have entered a customizable region and are excluded from automatic texture changing!");
+		p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
+	}
+	
+	private void exitCustomRegion(Player p, Overlay from, Overlay to){
+		p.sendMessage(ChatColor.AQUA + "Leaving customizable region!");
+		p.sendMessage(ChatColor.AQUA + "Type " + ChatColor.GOLD + "/usepack automatic " + ChatColor.AQUA + "to enable automatic texture changes!");
+	}
+	
+	private void enterRegion(Player p, Overlay from, Overlay to){
+		if(to.getPack() == null){
+			this.enterCustomRegion(p, from, to);
+		}else{
+			if(!PackHandler.isExcluded(p)){
+				this.applyPack(to, p);
+			}
+		}
+	}
+	
+	private void exitRegion(Player p, Overlay from, Overlay to){
+		if(from != null){
+			if(from.getPack() == null){
+				this.exitCustomRegion(p, from, to);
+			}else{
+				if(!PackHandler.isExcluded(p)){
+					PackHandler.applyDefaultPack(p);
+				}
+			}
 		}
 	}
 }
