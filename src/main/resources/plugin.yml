@@ -25,6 +25,7 @@ commands:
       /overlays weight <name> <weight number> - Sets priority for overlay (priority by highest weight)
       /overlays update - Updates the overlays to use changed pack URLs
   usepack:
+    permission: regionaltextures.manage.usepack
     description: Sets resourcepack for you
     usage: |
       USAGE:
